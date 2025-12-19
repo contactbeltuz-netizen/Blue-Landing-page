@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Instagram, Facebook, Linkedin, Youtube, ArrowRight, Mail, Send, CheckCircle2, Sparkles } from 'lucide-react';
+import { Instagram, Facebook, Linkedin, Youtube, ArrowRight, Mail, Send, CheckCircle2, Sparkles, MapPin, Phone, ExternalLink, Globe, ShieldCheck } from 'lucide-react';
 import { GoogleGenAI } from "@google/genai";
 
 const Footer: React.FC = () => {
@@ -56,24 +56,63 @@ const Footer: React.FC = () => {
   };
 
   return (
-    <footer className="bg-[#1a2b47] pt-24 pb-12 text-white border-t border-white/5">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-16 mb-20">
-          <div className="lg:col-span-4">
-            <div className="flex items-center gap-3 mb-8">
-              <img 
-                src="https://eleganttours.co.in/wp-content/uploads/2025/12/Untitled-design-28.png" 
-                alt="Elegant Tours Logo" 
-                className="h-12 w-auto object-contain"
-              />
+    <footer className="bg-[#0f172a] pt-28 pb-12 text-white relative overflow-hidden">
+      {/* Premium Gradient Overlays */}
+      <div className="absolute top-0 left-1/4 w-[500px] h-[500px] bg-[#ff6c00]/5 rounded-full blur-[120px] -translate-y-1/2 pointer-events-none"></div>
+      <div className="absolute bottom-0 right-1/4 w-[400px] h-[400px] bg-blue-600/5 rounded-full blur-[100px] translate-y-1/2 pointer-events-none"></div>
+
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-16 mb-24">
+          
+          {/* Brand & Contact Column */}
+          <div className="lg:col-span-5">
+            <div className="flex items-center gap-4 mb-10 group cursor-pointer" onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}>
+              <div className="bg-white p-2 rounded-2xl shadow-xl shadow-white/5 transition-transform group-hover:scale-105">
+                <img 
+                  src="https://eleganttours.co.in/wp-content/uploads/2025/12/Untitled-design-28.png" 
+                  alt="Elegant Tours Logo" 
+                  className="h-12 w-auto object-contain"
+                />
+              </div>
               <div className="flex flex-col leading-none">
-                <span className="text-2xl font-black tracking-tighter text-white">ELEGANT</span>
-                <span className="text-[10px] font-bold tracking-[0.4em] text-[#ff6c00]">TOURS</span>
+                <span className="text-3xl font-black tracking-tighter text-white">ELEGANT</span>
+                <span className="text-[11px] font-bold tracking-[0.5em] text-[#ff6c00]">TOURS</span>
               </div>
             </div>
-            <p className="text-white/60 text-lg leading-relaxed mb-8">
-              Elegant Tours is your gateway to the world's most breathtaking Sundarbans expeditions. We specialize in luxury boat journeys, wildlife tours, and heritage stays.
+            
+            <p className="text-slate-400 text-lg leading-relaxed mb-12 max-w-md font-medium">
+              Elevating wildlife tourism in the Sundarbans. We craft bespoke, eco-certified expeditions for the modern explorer seeking raw majesty and refined hospitality.
             </p>
+
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-10 mb-12">
+              {/* Address Box */}
+              <div className="bg-white/5 border border-white/10 p-6 rounded-[2rem] hover:bg-white/[0.08] transition-all group">
+                <div className="w-10 h-10 bg-[#ff6c00]/10 rounded-xl flex items-center justify-center text-[#ff6c00] mb-5 group-hover:scale-110 transition-transform">
+                  <MapPin className="w-5 h-5" />
+                </div>
+                <h5 className="font-black text-xs uppercase tracking-widest text-slate-500 mb-3">Expedition HQ</h5>
+                <p className="text-sm text-slate-300 leading-relaxed font-bold">
+                  1, Abdul Hamid Street,<br />
+                  2nd Floor, Room No. 204C,<br />
+                  Kolkata 700069
+                </p>
+              </div>
+
+              {/* Contact Box */}
+              <div className="bg-white/5 border border-white/10 p-6 rounded-[2rem] hover:bg-white/[0.08] transition-all group">
+                <div className="w-10 h-10 bg-[#ff6c00]/10 rounded-xl flex items-center justify-center text-[#ff6c00] mb-5 group-hover:scale-110 transition-transform">
+                  <Phone className="w-5 h-5" />
+                </div>
+                <h5 className="font-black text-xs uppercase tracking-widest text-slate-500 mb-3">Priority Concierge</h5>
+                <div className="flex flex-col gap-2">
+                  <a href="tel:+919903292946" className="text-sm text-slate-300 font-black hover:text-[#ff6c00] transition-colors">+91 99032 92946</a>
+                  <a href="mailto:info@eleganttours.co.in" className="text-xs text-slate-500 font-bold hover:text-[#ff6c00] transition-colors flex items-center gap-2">
+                    <Mail className="w-3.5 h-3.5" /> info@eleganttours.co.in
+                  </a>
+                </div>
+              </div>
+            </div>
+
             <div className="flex gap-4">
               {socialLinks.map((social, i) => (
                 <a 
@@ -82,90 +121,138 @@ const Footer: React.FC = () => {
                   target="_blank" 
                   rel="noopener noreferrer"
                   aria-label={social.label}
-                  className="w-12 h-12 rounded-full bg-white/5 flex items-center justify-center text-white/70 hover:bg-[#ff6c00] hover:text-white transition-all shadow-sm border border-white/10 hover:scale-110 active:scale-95"
+                  className="w-12 h-12 rounded-2xl bg-white/5 flex items-center justify-center text-slate-400 hover:bg-[#ff6c00] hover:text-white transition-all shadow-sm border border-white/5 hover:scale-110 active:scale-95 group"
                 >
-                  {social.icon}
+                  <div className="transition-transform group-hover:rotate-6">
+                    {social.icon}
+                  </div>
                 </a>
               ))}
             </div>
           </div>
 
-          <div className="lg:col-span-2">
-            <h4 className="font-black text-white mb-8 uppercase tracking-widest text-xs">Services</h4>
-            <ul className="space-y-4 text-white/60 font-medium">
-              <li><button onClick={() => handleLinkClick('service', 'Tiger Expeditions')} className="hover:text-[#ff6c00] transition-colors text-left">Tiger Expeditions</button></li>
-              <li><button onClick={() => handleLinkClick('service', 'Houseboat Stays')} className="hover:text-[#ff6c00] transition-colors text-left">Houseboat Stays</button></li>
-              <li><button onClick={() => handleLinkClick('service', 'Village Tours')} className="hover:text-[#ff6c00] transition-colors text-left">Village Tours</button></li>
-              <li><button onClick={() => handleLinkClick('service', 'Photography Trips')} className="hover:text-[#ff6c00] transition-colors text-left">Photography Trips</button></li>
-            </ul>
+          {/* Links Columns */}
+          <div className="lg:col-span-3 flex flex-col sm:flex-row gap-16 lg:gap-20">
+            <div className="flex-1">
+              <h4 className="font-black text-white mb-10 uppercase tracking-[0.3em] text-[10px] flex items-center gap-3">
+                <span className="w-6 h-px bg-[#ff6c00]"></span> Services
+              </h4>
+              <ul className="space-y-5 text-slate-400 font-bold text-sm">
+                {['Tiger Expeditions', 'Houseboat Stays', 'Village Tours', 'Photography Trips'].map((item) => (
+                  <li key={item}>
+                    <button 
+                      onClick={() => handleLinkClick('service', item)} 
+                      className="hover:text-white hover:translate-x-1 transition-all flex items-center gap-2 group"
+                    >
+                      {item} <ArrowRight className="w-3 h-3 opacity-0 group-hover:opacity-100 transition-all -translate-x-2 group-hover:translate-x-0 text-[#ff6c00]" />
+                    </button>
+                  </li>
+                ))}
+              </ul>
+            </div>
+
+            <div className="flex-1">
+              <h4 className="font-black text-white mb-10 uppercase tracking-[0.3em] text-[10px] flex items-center gap-3">
+                <span className="w-6 h-px bg-[#ff6c00]"></span> Hotspots
+              </h4>
+              <ul className="space-y-5 text-slate-400 font-bold text-sm">
+                {['Sajnekhali', 'Dobanki', 'Sudhanyakhali', 'Netidhopani'].map((item) => (
+                  <li key={item}>
+                    <button 
+                      onClick={() => handleLinkClick('destination', item)} 
+                      className="hover:text-white hover:translate-x-1 transition-all flex items-center gap-2 group"
+                    >
+                      {item} <ArrowRight className="w-3 h-3 opacity-0 group-hover:opacity-100 transition-all -translate-x-2 group-hover:translate-x-0 text-[#ff6c00]" />
+                    </button>
+                  </li>
+                ))}
+              </ul>
+            </div>
           </div>
 
-          <div className="lg:col-span-2">
-            <h4 className="font-black text-white mb-8 uppercase tracking-widest text-xs">Destinations</h4>
-            <ul className="space-y-4 text-white/60 font-medium">
-              <li><button onClick={() => handleLinkClick('destination', 'Sajnekhali')} className="hover:text-[#ff6c00] transition-colors text-left">Sajnekhali</button></li>
-              <li><button onClick={() => handleLinkClick('destination', 'Dobanki')} className="hover:text-[#ff6c00] transition-colors text-left">Dobanki</button></li>
-              <li><button onClick={() => handleLinkClick('destination', 'Sudhanyakhali')} className="hover:text-[#ff6c00] transition-colors text-left">Sudhanyakhali</button></li>
-              <li><button onClick={() => handleLinkClick('destination', 'Netidhopani')} className="hover:text-[#ff6c00] transition-colors text-left">Netidhopani</button></li>
-            </ul>
-          </div>
-
+          {/* Newsletter Column */}
           <div className="lg:col-span-4">
-            <h4 className="font-black text-white mb-8 uppercase tracking-widest text-xs">Elegant Club</h4>
-            <div className="bg-white/5 border border-white/10 p-8 rounded-[2.5rem] relative overflow-hidden group">
-              <div className="absolute -top-12 -right-12 w-24 h-24 bg-[#ff6c00]/10 rounded-full blur-2xl group-hover:scale-150 transition-transform duration-700"></div>
+            <div className="bg-gradient-to-br from-white/10 to-transparent border border-white/10 p-10 rounded-[3rem] relative overflow-hidden group shadow-2xl backdrop-blur-sm">
+              <div className="absolute -top-24 -right-24 w-48 h-48 bg-[#ff6c00]/20 rounded-full blur-[60px] group-hover:scale-150 transition-transform duration-1000"></div>
               
               <div className="relative z-10">
                 {!isSubscribed ? (
                   <>
-                    <p className="text-[#ff6c00] text-[9px] font-black uppercase tracking-[0.3em] mb-4 flex items-center gap-2">
+                    <div className="inline-flex items-center gap-2.5 bg-white/5 border border-white/10 px-4 py-1.5 rounded-full text-[#ff6c00] font-black text-[9px] mb-6 uppercase tracking-[0.3em] shadow-inner">
                       <Sparkles className="w-3.5 h-3.5" />
-                      Stay Notified
+                      Elegant Insider
+                    </div>
+                    <h5 className="text-2xl font-black text-white mb-4 tracking-tighter leading-tight">
+                      Join the <span className="text-[#ff6c00]">Elite Club</span>
+                    </h5>
+                    <p className="text-slate-400 font-medium text-sm mb-8 leading-relaxed">
+                      Receive early access to Tiger sighting forecasts and exclusive off-season rates.
                     </p>
-                    <p className="text-white/80 font-bold text-lg mb-6 leading-tight">
-                      Get exclusive Sundarbans updates and sighting alerts.
-                    </p>
-                    <form onSubmit={handleSubscribe} className="relative">
+                    <form onSubmit={handleSubscribe} className="relative group/form">
                       <input 
                         required
                         type="email" 
-                        placeholder="Your email address" 
+                        placeholder="Expert explorer email" 
                         value={email}
                         onChange={(e) => setEmail(e.target.value)}
-                        className="w-full bg-white/5 border border-white/10 px-6 py-4 rounded-2xl outline-none focus:ring-2 focus:ring-[#ff6c00] font-medium text-white transition-all pr-14" 
+                        className="w-full bg-black/40 border border-white/10 px-7 py-5 rounded-[1.5rem] outline-none focus:ring-2 focus:ring-[#ff6c00] font-bold text-white transition-all pr-16 text-sm placeholder:text-slate-600 focus:bg-black/60 shadow-inner" 
                       />
                       <button 
                         type="submit"
                         disabled={isSubmitting}
-                        className="absolute right-2 top-2 bottom-2 aspect-square bg-[#ff6c00] text-white rounded-xl flex items-center justify-center hover:bg-white hover:text-[#1a2b47] transition-all active:scale-90 disabled:opacity-50"
+                        className="absolute right-2.5 top-2.5 bottom-2.5 aspect-square bg-[#ff6c00] text-white rounded-xl flex items-center justify-center hover:bg-white hover:text-[#1a2b47] transition-all active:scale-90 disabled:opacity-50 shadow-lg shadow-[#ff6c00]/20"
                       >
                         {isSubmitting ? (
                           <div className="w-4 h-4 border-2 border-white/30 border-t-white rounded-full animate-spin"></div>
                         ) : (
-                          <ArrowRight className="w-5 h-5" />
+                          <ArrowRight className="w-6 h-6" />
                         )}
                       </button>
                     </form>
                   </>
                 ) : (
-                  <div className="py-4 animate-in zoom-in-95 duration-500">
-                    <div className="w-12 h-12 bg-[#ff6c00]/20 rounded-xl flex items-center justify-center mb-4 text-[#ff6c00]">
-                      <CheckCircle2 className="w-6 h-6" />
+                  <div className="py-6 animate-in zoom-in-95 duration-500 text-center">
+                    <div className="w-20 h-20 bg-[#ff6c00]/20 rounded-[2rem] flex items-center justify-center mb-8 text-[#ff6c00] mx-auto border border-[#ff6c00]/20 shadow-inner">
+                      <CheckCircle2 className="w-10 h-10" />
                     </div>
-                    <h5 className="text-xl font-black text-white mb-2 tracking-tight">You're in the loop!</h5>
-                    <p className="text-white/40 text-sm font-medium">Welcome to Elegant Tours. Expect wild news soon.</p>
+                    <h5 className="text-2xl font-black text-white mb-3 tracking-tighter">You're Enlisted</h5>
+                    <p className="text-slate-400 text-sm font-medium">Welcome to the inner circle. Prepare for the wild.</p>
                   </div>
                 )}
               </div>
             </div>
+            
+            <div className="mt-8 flex items-center justify-center lg:justify-start gap-6 px-6">
+               <div className="flex items-center gap-2 text-[9px] font-black text-slate-500 uppercase tracking-widest">
+                  <ShieldCheck className="w-3.5 h-3.5 text-[#ff6c00]" />
+                  Secure Data
+               </div>
+               <div className="w-1 h-1 rounded-full bg-slate-700"></div>
+               <div className="flex items-center gap-2 text-[9px] font-black text-slate-500 uppercase tracking-widest">
+                  <Globe className="w-3.5 h-3.5 text-[#ff6c00]" />
+                  Global Standards
+               </div>
+            </div>
           </div>
         </div>
 
-        <div className="pt-12 border-t border-white/5 flex flex-col md:flex-row justify-between items-center gap-6 text-white/40 text-sm font-bold">
-          <p>© 2024 Elegant Tours & Travels. All rights reserved.</p>
-          <div className="flex gap-8">
-            <a href="#" className="hover:text-white transition-colors">Privacy Policy</a>
-            <a href="#" className="hover:text-white transition-colors">Terms of Service</a>
+        {/* Bottom Bar */}
+        <div className="pt-12 border-t border-white/5 flex flex-col md:flex-row justify-between items-center gap-8">
+          <div className="flex flex-col md:flex-row items-center gap-4 md:gap-8">
+            <p className="text-slate-500 text-[11px] font-black uppercase tracking-widest">
+              © 2025 Elegant Tours & Travels. All rights reserved.
+            </p>
+          </div>
+          <div className="flex gap-10">
+            <a href="#" className="text-slate-500 text-[11px] font-black uppercase tracking-widest hover:text-white transition-colors flex items-center gap-2 group">
+              Privacy <ExternalLink className="w-3 h-3 opacity-0 group-hover:opacity-100 transition-all" />
+            </a>
+            <a href="#" className="text-slate-500 text-[11px] font-black uppercase tracking-widest hover:text-white transition-colors flex items-center gap-2 group">
+              Terms <ExternalLink className="w-3 h-3 opacity-0 group-hover:opacity-100 transition-all" />
+            </a>
+            <a href="#" className="text-[#ff6c00] text-[11px] font-black uppercase tracking-widest hover:text-white transition-colors flex items-center gap-2">
+              Sitemap
+            </a>
           </div>
         </div>
       </div>
