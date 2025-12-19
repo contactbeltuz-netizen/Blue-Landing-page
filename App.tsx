@@ -1,43 +1,55 @@
 import React from 'react';
 import Navbar from './components/Navbar';
 import Hero from './components/Hero';
-import MustVisitPlaces from './components/MustVisitPlaces';
+import USPSection from './components/USPSection';
 import WildlifeSlider from './components/WildlifeSlider';
+import MustVisitPlaces from './components/MustVisitPlaces';
 import PackageSection from './components/PackageSection';
-import WhyChooseUs from './components/WhyChooseUs';
-import DifferenceSection from './components/DifferenceSection';
 import AIPlanner from './components/AIPlanner';
-import Visualizer from './components/Visualizer';
-import FeaturedTours from './components/FeaturedTours';
+import DifferenceSection from './components/DifferenceSection';
+import WhyChooseUs from './components/WhyChooseUs';
 import Testimonials from './components/Testimonials';
+import ContactForm from './components/ContactForm';
 import Footer from './components/Footer';
+import StickyCTA from './components/StickyCTA';
 
 const App: React.FC = () => {
   return (
-    <div className="min-h-screen">
+    <div className="min-h-screen bg-white selection:bg-[#ff6c00] selection:text-white">
       <Navbar />
       <main>
-        {/* High-conversion flow for Paid Ads */}
+        {/* 1. THE HOOK: Immediate visual impact and credibility */}
         <Hero />
-        {/* Concrete destinations to drive immediate interest */}
-        <MustVisitPlaces />
-        {/* Wildlife showcase with slides as requested */}
+        
+        {/* 2. IMMEDIATE VALUE: What do we actually do? */}
+        <USPSection />
+        
+        {/* 3. EMOTIONAL HOOK: Visual beauty of the wildlife */}
         <WildlifeSlider />
-        {/* Core offerings based on duration in the 'Roar of the Wild' style */}
+        
+        {/* 4. GEOGRAPHIC CONTEXT: Where are we going? */}
+        <MustVisitPlaces />
+        
+        {/* 5. PRODUCT OFFERINGS: Specific packages to book */}
         <PackageSection />
-        {/* Highlighting the operational reasons for booking */}
-        <WhyChooseUs />
-        {/* Highlighting the unique approach to Sundarbans */}
-        <DifferenceSection />
-        {/* Specific deals and direct booking options */}
-        <FeaturedTours />
-        {/* AI Planner as a unique selling point / lead magnet */}
+        
+        {/* 6. MODERN UTILITY: Let AI do the planning */}
         <AIPlanner />
-        {/* Social Proof to reinforce the guarantee before the final visuals */}
+        
+        {/* 7. THE DISTINCTION: Why us specifically? */}
+        <DifferenceSection />
+        
+        {/* 8. TRUST SIGNALS: Safety and hospitality */}
+        <WhyChooseUs />
+        
+        {/* 9. SOCIAL PROOF: Real guest stories */}
         <Testimonials />
-        {/* Visualizer for engagement and "wow" factor */}
-        <Visualizer />
       </main>
+      
+      {/* Persistent Interaction Elements */}
+      <StickyCTA />
+      <ContactForm />
+      
       <Footer />
     </div>
   );

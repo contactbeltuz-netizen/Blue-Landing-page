@@ -23,7 +23,7 @@ const TRENDING_VISIONS = [
 const VISION_BLOCKS = {
   Themes: [
     { label: "Sundarbans Mist", value: "misty mangrove forest" },
-    { label: "Golden Safari", value: "golden hour tiger safari" },
+    { label: "Golden Hour", value: "golden hour tiger viewing" },
     { label: "Ancient Ruins", value: "overgrown temple ruins" },
     { label: "Coastal Oasis", value: "tropical river bank" },
     { label: "Night Jungle", value: "bioluminescent mangrove" }
@@ -94,7 +94,7 @@ const Visualizer: React.FC = () => {
             Sundarbans AI Studio
           </div>
           <h2 className="text-4xl md:text-7xl font-black mb-6 tracking-tighter leading-tight">
-            Visualize Your <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#ff6c00] to-[#ff6c00]/60">Safari Vision</span>
+            Visualize Your <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#ff6c00] to-[#ff6c00]/60">Voyage Vision</span>
           </h2>
           <p className="text-slate-400 text-lg md:text-xl max-w-2xl mx-auto leading-relaxed">
             Craft your perfect Sundarbans moment with our guided AI vision builder. No complex prompts required.
@@ -202,7 +202,7 @@ const Visualizer: React.FC = () => {
                   className="w-full bg-white text-[#1a2b47] hover:bg-[#ff6c00] hover:text-white disabled:bg-slate-800 disabled:text-slate-600 py-6 rounded-2xl font-black flex items-center justify-center gap-4 transition-all active:scale-95 shadow-2xl text-base uppercase tracking-[0.2em]"
                 >
                   {loading ? <Loader2 className="w-6 h-6 animate-spin" /> : <Wand2 className="w-6 h-6" />}
-                  <span>{loading ? 'GENERATING VISION...' : 'RENDER SAFARI VISION'}</span>
+                  <span>{loading ? 'GENERATING VISION...' : 'RENDER EXPEDITION VISION'}</span>
                 </button>
               </div>
             </div>

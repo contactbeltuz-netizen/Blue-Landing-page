@@ -1,209 +1,231 @@
 import React, { useState, useEffect } from 'react';
-import { Star, MapPin, ArrowUpRight, Clock, Calendar, Sparkles, Moon, Loader2, Send, X, User, Mail, PhoneCall, CheckCircle2, Trees } from 'lucide-react';
+import { Star, ArrowUpRight, Clock, Calendar, Sparkles, Moon, Loader2, Trees, ShieldCheck, Ship, Camera, Map, Waves, MapPin } from 'lucide-react';
 import { generateDreamDestinationImage } from '../services/geminiService';
-import { GoogleGenAI } from "@google/genai";
-
-const ADMIN_EMAIL = "nausad.hussain@gmail.com";
 
 const PACKAGE_DATA = [
-  {
-    id: 'pkg-1',
-    name: 'Day Tours: Nature Express',
-    duration: 'Same Day Return',
-    rating: 4.7,
-    img: 'https://eleganttours.co.in/wp-content/uploads/2025/12/Sajnekhali-Watch-Tower.jpg',
-    tag: 'Quick Escape',
-    icon: <Clock className="w-4 h-4" />
+  { 
+    id: 'pkg-1', 
+    name: 'Day Tours: Nature Express', 
+    duration: '6:00 AM - 6:00 PM', 
+    rating: 4.7, 
+    img: 'https://eleganttours.co.in/wp-content/uploads/2025/12/Sajnekhali-Watch-Tower.jpg', 
+    tag: 'Popular', 
+    highlights: ['Sajnekhali Watch Tower', 'Mangrove Interpretation Centre', 'Breakfast & Lunch on Boat'],
+    icon: <Clock className="w-5 h-5" />
   },
-  {
-    id: 'pkg-2',
-    name: '1 Night 2 Days Expedition',
-    duration: 'Overnight Stay',
-    rating: 4.9,
-    img: 'https://eleganttours.co.in/wp-content/uploads/2025/12/dobanki_watch-tower.jpg',
-    tag: 'Best Seller',
-    icon: <Moon className="w-4 h-4" />
+  { 
+    id: 'pkg-2', 
+    name: '1 Night 2 Days Expedition', 
+    duration: 'Overnight Adventure', 
+    rating: 4.9, 
+    img: 'https://eleganttours.co.in/wp-content/uploads/2025/12/dobanki_watch-tower.jpg', 
+    tag: 'Best Seller', 
+    highlights: ['Sudhanyakhali Tiger Reserve', 'Dobanki Canopy Walk', 'Traditional Village Experience'],
+    icon: <Moon className="w-5 h-5" />
   },
-  {
-    id: 'pkg-3',
-    name: '2 Night 3 Days Immersion',
-    duration: 'Deep Jungle Access',
-    rating: 5.0,
-    img: 'https://eleganttours.co.in/wp-content/uploads/2025/12/Sudhanyakhali-Watch-Tower_0.jpg',
-    tag: 'Flagship Experience',
-    icon: <Calendar className="w-4 h-4" />
+  { 
+    id: 'pkg-3', 
+    name: '2 Night 3 Days Immersion', 
+    duration: 'The Full Experience', 
+    rating: 5.0, 
+    img: 'https://eleganttours.co.in/wp-content/uploads/2025/12/Sudhanyakhali-Watch-Tower_0.jpg', 
+    tag: 'Elite Choice', 
+    highlights: ['Deep Jungle Navigation', 'Netidhopani Ruins', 'Evening Cultural Performance'],
+    icon: <Calendar className="w-5 h-5" />
   },
-  {
-    id: 'pkg-4',
-    name: 'Customized Package Tours',
-    duration: 'Flexible Duration',
-    rating: 4.9,
-    img: 'https://eleganttours.co.in/wp-content/uploads/2025/12/Netidhopani.jpg',
-    tag: 'Tailor Made',
-    icon: <Sparkles className="w-4 h-4" />
+  { 
+    id: 'pkg-4', 
+    name: 'Photography Special', 
+    duration: 'Wildlife Focus', 
+    rating: 4.8, 
+    img: 'https://eleganttours.co.in/wp-content/uploads/2025/12/Tigerjpg.jpg', 
+    tag: 'Pro Selection', 
+    highlights: ['Specialist Photography Guide', 'Golden Hour Boat Positioning', 'Low-Angle Hide Access'],
+    icon: <Camera className="w-5 h-5" />
+  },
+  { 
+    id: 'pkg-5', 
+    name: 'Heritage: Village Walk', 
+    duration: 'Cultural Journey', 
+    rating: 4.6, 
+    img: 'https://eleganttours.co.in/wp-content/uploads/2025/12/Jatar-Deul.jpg', 
+    tag: 'Cultural', 
+    highlights: ['Local Artisan Interaction', 'Honey Collection Lore', 'Village Community Lunch'],
+    icon: <MapPin className="w-5 h-5" />
+  },
+  { 
+    id: 'pkg-6', 
+    name: 'Bespoke Private Voyage', 
+    duration: 'Flexible Duration', 
+    rating: 4.9, 
+    img: 'https://eleganttours.co.in/wp-content/uploads/2025/12/Netidhopani.jpg', 
+    tag: 'Tailor Made', 
+    highlights: ['Exclusive Private Boat', 'Photographer Assistant', 'Custom Itinerary Design'],
+    icon: <Sparkles className="w-5 h-5" />
   }
 ];
 
 const PackageSection: React.FC = () => {
-  const [selectedPkg, setSelectedPkg] = useState<typeof PACKAGE_DATA[0] | null>(null);
-  const [isBooked, setIsBooked] = useState(false);
-  const [isSending, setIsSending] = useState(false);
-  const [formData, setFormData] = useState({ name: '', email: '', date: '', guests: 2 });
   const [aiImages, setAiImages] = useState<Record<string, string | null>>({});
   const [loadingImages, setLoadingImages] = useState<Record<string, boolean>>({});
 
   const generatePkgImage = async (pkg: typeof PACKAGE_DATA[0]) => {
     setLoadingImages(prev => ({ ...prev, [pkg.id]: true }));
     try {
-      const prompt = `${pkg.name} in Sundarbans. Boat safari, wildlife, mangrove forest. Cinematic.`;
+      const prompt = `${pkg.name} in Sundarbans. High-end boat safari, Royal Bengal Tiger landscape.`;
       const imageUrl = await generateDreamDestinationImage(prompt);
       if (imageUrl) setAiImages(prev => ({ ...prev, [pkg.id]: imageUrl }));
-    } catch (error) {
-      console.error(error);
-    } finally {
-      setLoadingImages(prev => ({ ...prev, [pkg.id]: false }));
+    } catch (error) { 
+      console.error(error); 
+    } finally { 
+      setLoadingImages(prev => ({ ...prev, [pkg.id]: false })); 
     }
   };
 
-  useEffect(() => {
-    PACKAGE_DATA.forEach(pkg => generatePkgImage(pkg));
+  useEffect(() => { 
+    PACKAGE_DATA.forEach(pkg => generatePkgImage(pkg)); 
   }, []);
 
   const handleBookNow = (pkg: typeof PACKAGE_DATA[0]) => {
-    setSelectedPkg(pkg);
-    setIsBooked(false);
-    setIsSending(false);
-    setFormData({ name: '', email: '', date: '', guests: 2 });
-  };
-
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-    if (!selectedPkg) return;
-    setIsSending(true);
-    try {
-      const ai = new GoogleGenAI({ apiKey: process.env.API_KEY });
-      await ai.models.generateContent({
-        model: "gemini-3-flash-preview",
-        contents: `New Package Inquiry: "${selectedPkg.name}". Client: ${formData.name} (${formData.email}). Guests: ${formData.guests}. Contact requested for pricing details.`,
-      });
-      setIsBooked(true);
-    } catch (error) {
-      setIsBooked(true); 
-    } finally {
-      setIsSending(false);
-    }
+    window.dispatchEvent(new CustomEvent('select-package', { 
+      detail: { packageName: pkg.name } 
+    }));
   };
 
   return (
-    <section id="packages" className="py-24 bg-white relative">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        
-        <div className="flex flex-col md:flex-row justify-between items-start md:items-end mb-16 gap-6">
+    <section id="packages" className="py-24 bg-white relative overflow-hidden">
+      {/* Background Decorative Elements */}
+      <div className="absolute top-1/4 -left-64 w-[500px] h-[500px] bg-[#ff6c00]/5 rounded-full blur-[100px] pointer-events-none"></div>
+      <div className="absolute bottom-1/4 -right-64 w-[500px] h-[500px] bg-[#1a2b47]/5 rounded-full blur-[100px] pointer-events-none"></div>
+
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+        <div className="flex flex-col lg:flex-row justify-between items-start lg:items-end mb-20 gap-8">
           <div className="max-w-2xl">
-            <div className="flex items-center gap-2 text-[#ff6c00] font-bold text-[10px] mb-4 uppercase tracking-[0.4em]">
-              <Trees className="w-4 h-4" />
-              Safari Duration Collections
+            <div className="inline-flex items-center gap-2.5 bg-slate-50 border border-slate-100 text-[#ff6c00] px-5 py-2 rounded-full text-[10px] font-black uppercase tracking-[0.4em] mb-6 shadow-sm">
+              <Ship className="w-4 h-4" />
+              Signature Voyages
             </div>
-            <h2 className="text-4xl md:text-6xl font-black text-[#1a2b47] leading-tight tracking-tighter">
-              Roar of the Wild <br /> <span className="text-[#ff6c00]">Premium Packages</span>
+            <h2 className="text-4xl md:text-7xl font-black text-[#1a2b47] tracking-tighter leading-[0.9]">
+              Curated <br />
+              <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#ff6c00] to-orange-400">Expeditions.</span>
             </h2>
           </div>
-          <p className="text-slate-500 font-medium text-lg max-w-sm border-l-4 border-[#ff6c00] pl-6 py-2">
-            Tailored itineraries designed to let you experience the pulse of the Sundarbans. Fill the form to get a personalized quote.
+          <p className="text-slate-500 font-medium text-lg md:text-xl max-w-sm border-l-4 border-[#ff6c00] pl-6 py-2">
+            Each package is a masterclass in wildlife exploration, balancing raw adventure with refined hospitality.
           </p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-8 md:gap-12 max-w-6xl mx-auto">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 lg:gap-12">
           {PACKAGE_DATA.map((pkg) => (
-            <div key={pkg.id} className="group relative bg-slate-50 rounded-[3rem] overflow-hidden transition-all duration-500 hover:shadow-2xl border border-slate-100 flex flex-col h-full min-h-[500px]">
-              <div className="relative aspect-video md:aspect-auto md:flex-1 overflow-hidden bg-slate-200">
+            <div 
+              key={pkg.id} 
+              onClick={() => handleBookNow(pkg)}
+              className="group relative bg-white rounded-[3rem] overflow-hidden border border-slate-100 shadow-sm hover:shadow-[0_40px_80px_-20px_rgba(26,43,71,0.15)] transition-all duration-700 cursor-pointer flex flex-col"
+            >
+              {/* Image Container */}
+              <div className="relative h-[260px] md:h-[320px] overflow-hidden bg-slate-100">
                 {loadingImages[pkg.id] ? (
-                  <div className="absolute inset-0 flex items-center justify-center">
-                    <Loader2 className="w-8 h-8 text-[#ff6c00] animate-spin" />
+                  <div className="absolute inset-0 flex items-center justify-center bg-slate-50">
+                    <div className="flex flex-col items-center gap-4">
+                      <Loader2 className="w-8 h-8 text-[#ff6c00] animate-spin" />
+                      <span className="text-[10px] font-black text-slate-400 uppercase tracking-widest">Generating Vision...</span>
+                    </div>
                   </div>
                 ) : (
-                  <img src={aiImages[pkg.id] || pkg.img} alt={pkg.name} className="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-110" />
+                  <img 
+                    src={aiImages[pkg.id] || pkg.img} 
+                    alt={pkg.name} 
+                    className="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-110"
+                  />
                 )}
                 
-                <div className="absolute top-8 left-8 flex flex-col gap-3">
-                   <span className="bg-[#ff6c00] text-white text-[11px] font-black uppercase tracking-widest px-5 py-2 rounded-full shadow-lg">
-                     {pkg.tag}
-                   </span>
-                   <span className="bg-[#1a2b47]/80 backdrop-blur-md text-white text-[10px] font-bold px-4 py-1.5 rounded-full flex items-center gap-2 border border-white/10">
-                     {pkg.icon} {pkg.duration}
-                   </span>
+                {/* Overlay Gradient */}
+                <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-60"></div>
+                
+                {/* Top Badges */}
+                <div className="absolute top-6 left-6 flex flex-col gap-2">
+                  <span className="bg-[#ff6c00] text-white text-[8px] font-black uppercase tracking-[0.2em] px-3 py-1 rounded-full shadow-lg backdrop-blur-md">
+                    {pkg.tag}
+                  </span>
+                  <div className="bg-white/90 backdrop-blur-md text-[#1a2b47] px-3 py-1 rounded-full shadow-lg flex items-center gap-2">
+                    <div className="text-[#ff6c00]">{pkg.icon}</div>
+                    <span className="text-[9px] font-black uppercase tracking-wider">{pkg.duration}</span>
+                  </div>
                 </div>
 
-                <div className="absolute bottom-8 left-8 right-8">
-                   <div className="bg-white/95 backdrop-blur-xl p-6 md:p-8 rounded-[2rem] shadow-2xl flex flex-col gap-2 transform translate-y-2 group-hover:translate-y-0 transition-all duration-500">
-                      <div className="flex items-center justify-between">
-                         <h3 className="text-xl md:text-2xl font-black text-[#1a2b47] tracking-tight">{pkg.name}</h3>
-                         <div className="flex items-center gap-1.5 text-[#ff6c00] font-black text-sm">
-                           <Star className="w-4 h-4 fill-current" /> {pkg.rating}
-                         </div>
-                      </div>
-                      <p className="text-slate-400 font-bold text-xs uppercase tracking-widest mb-2">Price on Request</p>
-                      
-                      <button 
-                        onClick={() => handleBookNow(pkg)} 
-                        className="mt-4 w-full bg-[#1a2b47] text-white py-4 md:py-5 rounded-2xl font-black hover:bg-[#ff6c00] transition-all flex items-center justify-center gap-3 active:scale-95 shadow-xl shadow-slate-950/10"
-                      >
-                        ENQUIRE NOW <ArrowUpRight className="w-5 h-5" />
-                      </button>
-                   </div>
+                {/* Rating */}
+                <div className="absolute top-6 right-6 bg-white/95 backdrop-blur-md p-2 rounded-xl shadow-xl flex flex-col items-center justify-center min-w-[40px]">
+                  <Star className="w-3 h-3 text-[#ff6c00] fill-current mb-0.5" />
+                  <span className="text-[10px] font-black text-[#1a2b47]">{pkg.rating}</span>
+                </div>
+              </div>
+
+              {/* Content Container */}
+              <div className="p-8 md:p-10 flex-1 flex flex-col">
+                <div className="flex justify-between items-start mb-6">
+                  <h3 className="text-xl md:text-2xl font-black text-[#1a2b47] tracking-tight group-hover:text-[#ff6c00] transition-colors duration-300">
+                    {pkg.name}
+                  </h3>
+                </div>
+
+                {/* Highlights List */}
+                <div className="grid grid-cols-1 gap-2.5 mb-8">
+                  {pkg.highlights.map((h, i) => (
+                    <div key={i} className="flex items-center gap-3 text-slate-500 group-hover:text-slate-700 transition-colors">
+                      <div className="w-1 h-1 rounded-full bg-[#ff6c00]/30 group-hover:bg-[#ff6c00] transition-colors"></div>
+                      <span className="text-sm font-bold tracking-tight">{h}</span>
+                    </div>
+                  ))}
+                </div>
+
+                <div className="mt-auto pt-6 border-t border-slate-50 flex items-center justify-between">
+                  <div className="flex items-center gap-3">
+                    <div className="w-8 h-8 rounded-full bg-slate-100 flex items-center justify-center text-slate-400">
+                      <ShieldCheck className="w-4 h-4" />
+                    </div>
+                    <div className="leading-tight">
+                      <p className="text-[8px] font-black text-slate-400 uppercase tracking-widest">Inclusive</p>
+                      <p className="text-[10px] font-bold text-[#1a2b47]">Secure</p>
+                    </div>
+                  </div>
+                  
+                  <button 
+                    onClick={(e) => { e.stopPropagation(); handleBookNow(pkg); }}
+                    className="bg-[#1a2b47] text-white h-12 md:h-14 px-6 md:px-8 rounded-xl font-black text-xs uppercase tracking-widest flex items-center gap-2 hover:bg-[#ff6c00] transition-all duration-300 shadow-xl active:scale-95 group/btn"
+                  >
+                    SELECT
+                    <ArrowUpRight className="w-4 h-4 group-hover/btn:translate-x-1 group-hover/btn:-translate-y-1 transition-transform" />
+                  </button>
                 </div>
               </div>
             </div>
           ))}
         </div>
-      </div>
 
-      {selectedPkg && (
-        <div className="fixed inset-0 z-[100] flex items-center justify-center p-4">
-          <div className="absolute inset-0 bg-[#1a2b47]/90 backdrop-blur-md" onClick={() => setSelectedPkg(null)}></div>
-          <div className="relative w-full max-w-xl bg-white rounded-[3rem] shadow-2xl overflow-hidden animate-in zoom-in-95 duration-300 max-h-[90vh] flex flex-col">
-            <button onClick={() => setSelectedPkg(null)} className="absolute top-8 right-8 p-3 bg-slate-100 hover:bg-slate-200 rounded-full z-10 transition-colors">
-              <X className="w-5 h-5 text-slate-500" />
-            </button>
-
-            <div className="overflow-y-auto flex-1">
-              {!isBooked ? (
-                <div className="p-10 md:p-14">
-                  <h3 className="text-3xl font-black text-[#1a2b47] mb-2">{selectedPkg.name}</h3>
-                  <p className="text-[#ff6c00] font-black uppercase tracking-widest text-xs mb-8">Inquiry for {selectedPkg.duration}</p>
-
-                  <form onSubmit={handleSubmit} className="space-y-6">
-                    <div className="space-y-2">
-                      <label className="text-[10px] font-black text-slate-400 uppercase tracking-widest flex items-center gap-2"><User className="w-3 h-3" /> Full Name</label>
-                      <input required disabled={isSending} type="text" placeholder="Your Name" value={formData.name} onChange={(e) => setFormData({...formData, name: e.target.value})} className="w-full bg-slate-50 border border-slate-100 p-5 rounded-2xl font-bold outline-none focus:ring-2 focus:ring-[#ff6c00] transition-all text-[#1a2b47]" />
-                    </div>
-                    <div className="space-y-2">
-                      <label className="text-[10px] font-black text-slate-400 uppercase tracking-widest flex items-center gap-2"><Mail className="w-3 h-3" /> Email</label>
-                      <input required disabled={isSending} type="email" placeholder="email@example.com" value={formData.email} onChange={(e) => setFormData({...formData, email: e.target.value})} className="w-full bg-slate-50 border border-slate-100 p-5 rounded-2xl font-bold outline-none focus:ring-2 focus:ring-[#ff6c00] transition-all text-[#1a2b47]" />
-                    </div>
-                    <button type="submit" disabled={isSending} className="w-full bg-[#ff6c00] text-white py-6 rounded-2xl font-black text-lg shadow-2xl shadow-[#ff6c00]/20 flex items-center justify-center gap-4 active:scale-[0.98] transition-all">
-                      {isSending ? <Loader2 className="w-6 h-6 animate-spin" /> : <><Send className="w-5 h-5" /> REQUEST PRICING</>}
-                    </button>
-                    <p className="text-center text-slate-400 text-[10px] font-bold uppercase tracking-widest">Our experts will contact you with a customized quote.</p>
-                  </form>
-                </div>
-              ) : (
-                <div className="p-10 md:p-14 text-center flex flex-col items-center">
-                  <div className="w-24 h-24 bg-[#ff6c00]/10 rounded-full flex items-center justify-center mb-10 border border-[#ff6c00]/20">
-                    <CheckCircle2 className="w-12 h-12 text-[#ff6c00]" />
-                  </div>
-                  <h3 className="text-4xl font-black text-[#1a2b47] mb-6">Inquiry Received!</h3>
-                  <div className="bg-[#ff6c00]/10 p-8 rounded-[2.5rem] text-[#1a2b47] border border-[#ff6c00]/20 font-bold mb-8 flex flex-col items-center gap-4">
-                    <PhoneCall className="w-10 h-10 text-[#ff6c00]" />
-                    <p className="text-xl">Our Sundarbans experts will contact you shortly with the best available pricing for your trip.</p>
-                  </div>
-                  <button onClick={() => setSelectedPkg(null)} className="w-full bg-[#1a2b47] text-white py-6 rounded-2xl font-black text-xl hover:bg-[#1a2b47]/90 active:scale-95">CLOSE</button>
-                </div>
-              )}
+        {/* Custom Section Footer */}
+        <div className="mt-20 p-10 md:p-14 rounded-[4rem] bg-[#1a2b47] text-white flex flex-col md:flex-row items-center justify-between gap-10 overflow-hidden relative shadow-2xl">
+          <div className="absolute inset-0 opacity-10 pointer-events-none">
+            <Waves className="absolute -bottom-20 -left-20 w-[400px] h-[400px] rotate-12" />
+          </div>
+          
+          <div className="flex items-center gap-8 relative z-10">
+            <div className="w-20 h-20 bg-white/5 rounded-3xl flex items-center justify-center border border-white/10">
+              <Map className="w-10 h-10 text-[#ff6c00]" />
+            </div>
+            <div>
+              <p className="text-[#ff6c00] font-black text-xs uppercase tracking-[0.3em] mb-2">Unmatched Customization</p>
+              <h4 className="text-3xl font-black tracking-tighter">Need a fully custom route?</h4>
             </div>
           </div>
+
+          <button 
+            onClick={() => window.dispatchEvent(new CustomEvent('toggle-enquiry'))}
+            className="group bg-white text-[#1a2b47] px-12 py-5 rounded-2xl font-black text-lg hover:bg-[#ff6c00] hover:text-white transition-all shadow-xl active:scale-95 relative z-10 uppercase tracking-widest"
+          >
+            CHAT WITH EXPERT
+          </button>
         </div>
-      )}
+      </div>
     </section>
   );
 };

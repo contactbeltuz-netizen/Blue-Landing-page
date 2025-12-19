@@ -1,6 +1,6 @@
 {
   "name": "Wanderlust AI - Next-Gen Travel Explorer",
-  "description": "A premium, AI-powered travel landing page that helps you discover and visualize your next dream destination using Gemini technology.",
+  "description": "A premium, AI-powered travel landing page that helps you discover your next dream destination using Gemini technology.",
   "requestFramePermissions": [
     "geolocation"
   ]

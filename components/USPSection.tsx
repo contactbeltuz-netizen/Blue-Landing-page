@@ -1,6 +1,5 @@
-
 import React from 'react';
-import { Trees, ShieldCheck, Sparkles, Target, Compass, Camera, Heart } from 'lucide-react';
+import { Trees, ShieldCheck, Target, Compass, Camera } from 'lucide-react';
 
 const USPs = [
   {
@@ -20,59 +19,54 @@ const USPs = [
   },
   {
     icon: <ShieldCheck className="w-8 h-8 text-[#ff6c00]" />,
-    title: "Safety First",
+    title: "Safety Standard",
     description: "Premium safety gear, satellite tracking, and real-time support to ensure your wilderness exploration is secure and comfortable."
   }
 ];
 
 const USPSection: React.FC = () => {
-  const scrollToDestinations = () => {
-    const element = document.getElementById('destinations');
-    if (element) {
-      element.scrollIntoView({ behavior: 'smooth' });
-    }
+  const handleOpenEnquiry = () => {
+    window.dispatchEvent(new CustomEvent('toggle-enquiry'));
   };
 
   return (
-    <section className="py-20 bg-white relative">
+    <section className="py-24 bg-white relative">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 mb-24">
           {USPs.map((usp, index) => (
             <div key={index} className="group relative">
-              <div className="mb-6 p-4 bg-slate-50 rounded-2xl inline-block group-hover:bg-[#ff6c00]/10 transition-colors duration-300">
+              <div className="mb-8 p-5 bg-slate-50 rounded-2xl inline-block group-hover:bg-[#ff6c00]/10 transition-all duration-500 group-hover:-translate-y-1">
                 {usp.icon}
               </div>
-              <h3 className="text-xl font-black text-[#1a2b47] mb-3 tracking-tight">
+              <h3 className="text-xl font-black text-[#1a2b47] mb-4 tracking-tight">
                 {usp.title}
               </h3>
-              <p className="text-slate-500 leading-relaxed font-medium">
+              <p className="text-slate-500 leading-relaxed font-medium text-sm">
                 {usp.description}
               </p>
-              <div className="absolute -bottom-4 left-0 w-0 h-1 bg-[#ff6c00] transition-all duration-300 group-hover:w-12"></div>
+              <div className="absolute -bottom-4 left-0 w-0 h-1 bg-[#ff6c00] transition-all duration-500 group-hover:w-16"></div>
             </div>
           ))}
         </div>
 
-        <div className="mt-20 p-8 rounded-[2.5rem] bg-[#1a2b47] text-white flex flex-col md:flex-row items-center justify-between gap-8 overflow-hidden relative shadow-2xl">
-           <div className="absolute top-0 right-0 w-64 h-64 bg-white/5 rounded-full -translate-y-1/2 translate-x-1/2 blur-3xl"></div>
+        <div className="p-8 md:p-12 rounded-[3rem] bg-[#1a2b47] text-white flex flex-col md:flex-row items-center justify-between gap-10 overflow-hidden relative shadow-[0_30px_60px_-15px_rgba(26,43,71,0.4)]">
+           <div className="absolute top-0 right-0 w-80 h-80 bg-white/5 rounded-full -translate-y-1/2 translate-x-1/2 blur-3xl pointer-events-none"></div>
            
-           <div className="flex items-center gap-6 relative z-10">
-              <div className="p-4 bg-white/10 rounded-full">
-                <Target className="w-8 h-8 text-[#ff6c00]" />
+           <div className="flex items-center gap-8 relative z-10">
+              <div className="w-20 h-20 bg-white/10 rounded-3xl flex items-center justify-center border border-white/10">
+                <Target className="w-10 h-10 text-[#ff6c00]" />
               </div>
               <div>
-                <p className="text-[#ff6c00]/80 text-sm font-black uppercase tracking-widest">Wildlife Sanctuary</p>
-                <p className="text-2xl font-black">Trusted by 10,000+ Safarists</p>
+                <p className="text-[#ff6c00] text-[10px] font-black uppercase tracking-[0.4em] mb-2">Signature Experience</p>
+                <p className="text-2xl md:text-3xl font-black tracking-tighter">Trusted by 10K+ Verified Customers</p>
               </div>
            </div>
 
-           <div className="h-px w-full md:h-12 md:w-px bg-white/10"></div>
-
            <button 
-              onClick={scrollToDestinations}
-              className="bg-[#ff6c00] text-white px-10 py-4 rounded-2xl font-black hover:bg-[#e65a00] transition-all shadow-xl shadow-black/20 relative z-10 active:scale-95"
+              onClick={handleOpenEnquiry}
+              className="w-full md:w-auto bg-[#ff6c00] text-white px-12 py-5 rounded-2xl font-black hover:bg-white hover:text-[#1a2b47] transition-all shadow-2xl active:scale-95 uppercase tracking-widest text-sm relative z-10"
             >
-             BOOK YOUR SAFARI
+             BOOK YOUR ESCAPES
            </button>
         </div>
       </div>

@@ -1,4 +1,3 @@
-
 export interface Destination {
   id: string;
   name: string;
@@ -22,5 +21,4 @@ export interface AIRecommendation {
   destination: string;
   reason: string;
   suggestedActivities: string[];
-  estimatedCost: string;
 }

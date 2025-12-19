@@ -1,11 +1,10 @@
-
 import { GoogleGenAI, Type } from "@google/genai";
 import { AIRecommendation, RecommendationRequest } from "../types";
 
 const AGENCY_SYSTEM_INSTRUCTION = `
 You are the Lead Wildlife Strategist for "Elegant Tours", specializing EXCLUSIVELY in the Sundarbans Mangrove Forest. 
 Your agency's expertise focuses on:
-1. Royal Bengal Tiger safaris and mangrove boat stays.
+1. Royal Bengal Tiger expeditions and mangrove boat stays.
 2. Eco-tourism and village immersion tours in the Sundarbans region.
 3. Logistics for groups visiting watchtowers like Sajnekhali, Sudhanyakhali, and Dobanki.
 
@@ -14,6 +13,7 @@ When a user asks for recommendations, you MUST focus on specific locations withi
 - Suggest watchtowers for wildlife sightings.
 - Suggest private houseboats or eco-resorts.
 - Tailor activities to the specified guest count and duration (typically 2-4 days).
+- DO NOT mention specific prices or estimated costs. All pricing is provided on request.
 `;
 
 export const getTravelRecommendations = async (req: RecommendationRequest): Promise<AIRecommendation[]> => {
@@ -21,7 +21,7 @@ export const getTravelRecommendations = async (req: RecommendationRequest): Prom
   const ai = new GoogleGenAI({ apiKey: process.env.API_KEY });
   const prompt = `Plan a Sundarbans expedition based on:
     Mood: ${req.mood}
-    Budget: ${req.budget}
+    Budget Tier: ${req.budget} (Provide quality accordingly but do not list price)
     Duration: ${req.duration}
     Explorers: ${req.guests}
     Specific Needs: ${req.preferences}
@@ -44,10 +44,9 @@ export const getTravelRecommendations = async (req: RecommendationRequest): Prom
             suggestedActivities: { 
               type: Type.ARRAY, 
               items: { type: Type.STRING } 
-            },
-            estimatedCost: { type: Type.STRING }
+            }
           },
-          required: ["destination", "reason", "suggestedActivities", "estimatedCost"]
+          required: ["destination", "reason", "suggestedActivities"]
         }
       }
     }

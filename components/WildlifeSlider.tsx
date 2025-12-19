@@ -14,7 +14,7 @@ const WILDLIFE = [
     category: "Aquatic Giants",
     image: "https://eleganttours.co.in/wp-content/uploads/2025/12/Saltwater-crocodile.webp",
     position: "object-cover object-center",
-    description: "Lurking in the brackish waters, these prehistoric reptiles are a common sight during low tide safaris."
+    description: "Lurking in the brackish waters, these prehistoric reptiles are a common sight during low tide expeditions."
   },
   {
     name: "Spotted Deer",
@@ -61,7 +61,7 @@ const WildlifeSlider: React.FC = () => {
           <div className="max-w-2xl">
             <div className="inline-flex items-center gap-2 text-[#ff6c00] font-black text-[10px] mb-4 md:mb-6 uppercase tracking-[0.4em]">
               <Eye className="w-3.5 h-3.5" />
-              WILDLIFE SPOTTING
+              WILDLIFE ENCOUNTERS
             </div>
             <h2 className="text-4xl md:text-6xl font-black leading-tight tracking-tight">
               Fauna of the <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#ff6c00] to-[#ff6c00]/60">Mangroves</span>
@@ -122,8 +122,8 @@ const WildlifeSlider: React.FC = () => {
                         <Camera className="w-5 md:w-6 h-5 md:h-6" />
                       </div>
                       <div>
-                        <p className="text-[9px] font-black uppercase text-white/50">Best Sighting</p>
-                        <p className="font-bold text-sm md:text-base">Winter Safaris</p>
+                        <p className="text-[9px] font-black uppercase text-white/50">Best Viewing</p>
+                        <p className="font-bold text-sm md:text-base">Winter Voyages</p>
                       </div>
                    </div>
                    <div className="bg-white/10 backdrop-blur-xl border border-white/10 p-5 md:p-6 rounded-[2rem] flex items-center gap-4">
@@ -157,7 +157,7 @@ const WildlifeSlider: React.FC = () => {
           <div className="bg-[#ff6c00]/20 p-2 rounded-lg">
             <Info className="w-5 h-5 text-[#ff6c00]" />
           </div>
-          <p className="text-xs md:text-sm font-bold text-white/60">Professional wildlife guides accompany all safaris for safe viewing.</p>
+          <p className="text-xs md:text-sm font-bold text-white/60">Professional wildlife guides accompany all expeditions for safe viewing.</p>
         </div>
       </div>
     </section>
