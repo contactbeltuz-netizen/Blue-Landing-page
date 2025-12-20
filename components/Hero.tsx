@@ -5,9 +5,7 @@ const TOUR_PACKAGES_DATA = [
   "Day Tours: Nature Express",
   "1 Night 2 Days Expedition",
   "2 Night 3 Days Immersion",
-  "Bespoke: Customized Package",
-  "Photography Special",
-  "Heritage: Village Walk"
+  "Customized Tour Packages"
 ];
 
 const Hero: React.FC = () => {
@@ -52,13 +50,16 @@ const Hero: React.FC = () => {
           Trusted by 10K+ Verified Customers
         </div>
 
-        <h1 className="text-5xl sm:text-8xl lg:text-[9rem] font-black text-white mb-10 leading-[0.9] tracking-tighter drop-shadow-2xl animate-in fade-in slide-in-from-bottom duration-1000 delay-100">
-          BOOK YOUR <br />
-          <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#ff6c00] to-orange-400">ESCAPES.</span>
+        <h1 className="text-4xl sm:text-6xl lg:text-[5.5rem] font-black text-white mb-10 leading-[1.1] tracking-tighter drop-shadow-2xl animate-in fade-in slide-in-from-bottom duration-1000 delay-100 uppercase">
+          Experience Sundarbans <br />
+          <span className="text-2xl sm:text-4xl lg:text-5xl block mt-4 mb-2 text-white/80 font-bold tracking-normal">like never before!</span>
+          <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#ff6c00] to-orange-400 block mt-4">
+            Sundarbans Tour Packages
+          </span>
         </h1>
         
         <p className="max-w-3xl mx-auto mb-16 text-lg md:text-2xl text-white/90 font-medium tracking-tight px-4 leading-relaxed animate-in fade-in slide-in-from-bottom duration-1000 delay-200">
-          Experience the raw majesty of the Royal Bengal Tiger in the world's largest mangrove forest with Sundarbans' most awarded expedition collection.
+          Where History, Wildlife & the Living Biosphere Come Together
         </p>
 
         {/* High-Conversion Search Bar */}
@@ -113,7 +114,7 @@ const Hero: React.FC = () => {
           </div>
           
           <div className="mt-12 flex flex-wrap items-center justify-center gap-x-10 gap-y-4 text-white/60 text-[10px] font-black uppercase tracking-[0.25em]">
-             <div className="flex items-center gap-2.5"><CheckCircle2 className="w-4 h-4 text-[#ff6c00]" /> Verified Local Guides</div>
+             <div className="flex items-center gap-2.5"><CheckCircle2 className="w-4 h-4 text-[#ff6c00]" /> Verified Local Tour Coordinators</div>
              <div className="flex items-center gap-2.5"><CheckCircle2 className="w-4 h-4 text-[#ff6c00]" /> 24/7 Concierge Support</div>
              <div className="flex items-center gap-2.5"><CheckCircle2 className="w-4 h-4 text-[#ff6c00]" /> Eco-Certified Expeditions</div>
           </div>

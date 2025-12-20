@@ -10,7 +10,7 @@ const REVIEWS = [
   },
   {
     name: "Supriyo Ghosh",
-    text: "A well-managed tour. The itinerary was followed strictly and our local guide had impressive knowledge of the mangrove tracks. Highly recommend for bird watchers.",
+    text: "A well-managed tour. The itinerary was followed strictly and our local tour coordinator had impressive knowledge of the mangrove tracks. Highly recommend for bird watchers.",
     rating: 4.8,
     tag: "Photography Enthusiast"
   },

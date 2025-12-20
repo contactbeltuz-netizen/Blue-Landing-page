@@ -44,7 +44,7 @@ const DifferenceSection: React.FC = () => {
             </h2>
           </div>
           <p className="text-slate-500 font-medium text-base md:text-lg max-w-sm border-l-4 border-[#ff6c00] pl-6 py-2">
-            We don't just provide boat rides; we craft transformative wildlife experiences rooted in conservation and elite local expertise.
+            At Elegant Tours, we don’t just offer tours — we curate immersive Sundarbans experiences rooted in conservation values and deep local knowledge.
           </p>
         </div>
 

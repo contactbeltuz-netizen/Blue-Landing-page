@@ -1,14 +1,12 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { Mail, Phone, User, Users, MessageSquare, Send, CheckCircle2, Loader2, Sparkles, MapPin, PhoneCall, ChevronDown, ShieldCheck, Calendar, Plus, Minus, X } from 'lucide-react';
-import { GoogleGenAI } from "@google/genai";
+import { sendInquiry } from '../services/apiService';
 
 const PACKAGES = [
   "Day Tours: Nature Express",
   "1 Night 2 Days Expedition",
   "2 Night 3 Days Immersion",
-  "Bespoke: Customized Package",
-  "Photography Special",
-  "Heritage: Village Walk"
+  "Customized Tour Packages"
 ];
 
 const ContactForm: React.FC = () => {
@@ -65,19 +63,14 @@ const ContactForm: React.FC = () => {
     
     setLoading(true);
     try {
-      const ai = new GoogleGenAI({ apiKey: process.env.API_KEY });
-      await ai.models.generateContent({
-        model: "gemini-3-flash-preview",
-        contents: `New Premium Lead:
-        Name: ${formData.name}
-        Phone/WhatsApp: ${formData.phone}
-        Email: ${formData.email}
-        Date: ${formData.date}
-        Guests: ${formData.guests}
-        Package: ${formData.package}
-        Note: ${formData.message}`,
+      const result = await sendInquiry({
+        name: formData.name,
+        email: formData.email,
+        phone: formData.phone,
+        type: 'General',
+        details: `Package: ${formData.package}, Date: ${formData.date}, Guests: ${formData.guests}, Message: ${formData.message}`
       });
-      setSuccess(true);
+      if (result) setSuccess(true);
     } catch (error) {
       setSuccess(true);
     } finally {
@@ -184,7 +177,7 @@ const ContactForm: React.FC = () => {
                     <MapPin className="w-3.5 h-3.5 text-[#ff6c00]" /> Select Journey
                   </label>
                   <div 
-                    onClick={() => setShowPackageDropdown(!showPackageDropdown)}
+                    onClick={() => {if (!loading && !success) setShowPackageDropdown(!showPackageDropdown)}}
                     className="w-full bg-slate-50 border border-slate-100 p-4 rounded-xl font-black flex items-center justify-between cursor-pointer hover:bg-slate-100 transition-all text-[#1a2b47]"
                   >
                     <span className={formData.package ? 'text-[#1a2b47]' : 'text-slate-400'}>
@@ -248,8 +241,11 @@ const ContactForm: React.FC = () => {
                 <div className="absolute inset-0 bg-[#ff6c00] rounded-[2.5rem] animate-ping opacity-10"></div>
               </div>
               <h3 className="text-4xl font-black text-[#1a2b47] mb-6 tracking-tight">Expedition Logged!</h3>
-              <p className="text-slate-500 text-lg max-w-sm mb-12 font-medium leading-relaxed">
+              <p className="text-slate-500 text-lg max-w-sm mb-4 font-medium leading-relaxed">
                 Thank you, <span className="text-[#1a2b47] font-bold">{formData.name}</span>. Our lead naturalist will reach out to <span className="text-[#ff6c00] font-black underline decoration-2 underline-offset-8 decoration-[#ff6c00]/30">{formData.phone}</span> very shortly.
+              </p>
+              <p className="text-slate-400 text-sm font-bold mb-12">
+                A confirmation email has been sent to <span className="text-[#1a2b47]">{formData.email}</span>.
               </p>
               <button onClick={() => setIsOpen(false)} className="bg-[#1a2b47] text-white px-12 py-5 rounded-2xl font-black uppercase tracking-widest text-xs hover:bg-[#ff6c00] transition-all shadow-xl active:scale-95">
                 RETURN TO EXPLORER

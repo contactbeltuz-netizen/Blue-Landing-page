@@ -1,5 +1,5 @@
 import React from 'react';
-import { Trees, ShieldCheck, Target, Compass, Camera } from 'lucide-react';
+import { Trees, ShieldCheck, Target, Compass, Ship } from 'lucide-react';
 
 const USPs = [
   {
@@ -13,9 +13,9 @@ const USPs = [
     description: "Every voyage is led by government-approved naturalists with deep knowledge of local flora, fauna, and tiger behavior."
   },
   {
-    icon: <Camera className="w-8 h-8 text-[#ff6c00]" />,
-    title: "Premium Photo Boats",
-    description: "Specially designed low-noise houseboats with panoramic views, perfect for capturing that once-in-a-lifetime wildlife shot."
+    icon: <Ship className="w-8 h-8 text-[#ff6c00]" />,
+    title: "Tourist Boat",
+    description: "Enjoy a scenic cruise through the waterways"
   },
   {
     icon: <ShieldCheck className="w-8 h-8 text-[#ff6c00]" />,

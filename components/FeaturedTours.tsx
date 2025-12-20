@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Star, MapPin, ArrowUpRight, Flame, Users, X, CheckCircle2, Calendar, Mail, User, Loader2, Send, Plus, Minus, PhoneCall, Globe, CheckCircle, Trees, Phone } from 'lucide-react';
 import { generateDreamDestinationImage } from '../services/geminiService';
-import { GoogleGenAI } from "@google/genai";
+import { sendInquiry } from '../services/apiService';
 
 const TOURS = [
   {
@@ -29,7 +29,7 @@ const TOURS = [
     rating: 4.8,
     img: 'https://eleganttours.co.in/wp-content/uploads/2025/12/Sajnekhali-Watch-Tower.jpg',
     tags: ['Trending'],
-    availability: 'Guided Experts'
+    availability: 'Tour Coordinator Experts'
   }
 ];
 
@@ -61,10 +61,9 @@ const FeaturedTours: React.FC = () => {
   useEffect(() => { TOURS.forEach(tour => generateTourImage(tour.id, tour.name, tour.country)); }, []);
 
   const handleBookNow = (tour: typeof TOURS[0]) => {
-    // Dispatch event to ContactForm for auto-selection
-    window.dispatchEvent(new CustomEvent('select-package', { 
-      detail: { packageName: tour.name } 
-    }));
+    setFormData(prev => ({ ...prev, tourName: tour.name }));
+    setSelectedTour(tour);
+    setIsBooked(false);
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -72,17 +71,14 @@ const FeaturedTours: React.FC = () => {
     if (!selectedTour) return;
     setIsSending(true);
     try {
-      const ai = new GoogleGenAI({ apiKey: process.env.API_KEY });
-      await ai.models.generateContent({
-        model: "gemini-3-flash-preview",
-        contents: `Tour Inquiry: ${selectedTour.name}. 
-        Name: ${formData.name}
-        Phone: ${formData.phone}
-        Email: ${formData.email}
-        Date: ${formData.date}
-        Guests: ${formData.guests}`,
+      const result = await sendInquiry({
+        name: formData.name,
+        email: formData.email,
+        phone: formData.phone,
+        type: 'Tour',
+        details: `Specific Tour: ${selectedTour.name}, Travel Date: ${formData.date}, Guests: ${formData.guests}`
       });
-      setIsBooked(true);
+      if (result) setIsBooked(true);
     } catch (error) { setIsBooked(true); }
     finally { setIsSending(false); }
   };
@@ -138,21 +134,21 @@ const FeaturedTours: React.FC = () => {
                   <form onSubmit={handleSubmit} className="space-y-6">
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                       <div className="space-y-2">
-                        <label className="text-[10px] font-black text-slate-400 uppercase tracking-widest flex items-center gap-2"><User className="w-3 h-3" /> Full Name</label>
+                        <label className="text-[10px] font-black text-slate-400 uppercase tracking-widest flex items-center gap-2"><User className="w-3.5 h-3.5" /> Full Name</label>
                         <input required autoComplete="name" type="text" placeholder="Your Name" value={formData.name} onChange={(e) => setFormData({...formData, name: e.target.value})} className="w-full bg-slate-50 border border-slate-100 p-5 rounded-2xl font-bold outline-none focus:ring-2 focus:ring-[#ff6c00] transition-all text-[#1a2b47]" />
                       </div>
                       <div className="space-y-2">
-                        <label className="text-[10px] font-black text-[#ff6c00] uppercase tracking-widest flex items-center gap-2"><Phone className="w-3 h-3" /> WhatsApp/Mobile</label>
+                        <label className="text-[10px] font-black text-[#ff6c00] uppercase tracking-widest flex items-center gap-2"><Phone className="w-3.5 h-3.5" /> WhatsApp/Mobile</label>
                         <input required inputMode="tel" type="tel" placeholder="+91 00000 00000" value={formData.phone} onChange={(e) => setFormData({...formData, phone: e.target.value})} className="w-full bg-[#ff6c00]/5 border border-[#ff6c00]/20 p-5 rounded-2xl font-black outline-none focus:ring-2 focus:ring-[#ff6c00] transition-all text-[#1a2b47]" />
                       </div>
                     </div>
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                       <div className="space-y-2">
-                        <label className="text-[10px] font-black text-slate-400 uppercase tracking-widest flex items-center gap-2"><Mail className="w-3 h-3" /> Email</label>
+                        <label className="text-[10px] font-black text-slate-400 uppercase tracking-widest flex items-center gap-2"><Mail className="w-3.5 h-3.5 text-[#ff6c00]" /> Email Address</label>
                         <input required autoComplete="email" type="email" placeholder="email@example.com" value={formData.email} onChange={(e) => setFormData({...formData, email: e.target.value})} className="w-full bg-slate-50 border border-slate-100 p-5 rounded-2xl font-bold outline-none focus:ring-2 focus:ring-[#ff6c00] transition-all text-[#1a2b47]" />
                       </div>
                       <div className="space-y-2">
-                        <label className="text-[10px] font-black text-slate-400 uppercase tracking-widest flex items-center gap-2"><Calendar className="w-3 h-3" /> Travel Date</label>
+                        <label className="text-[10px] font-black text-slate-400 uppercase tracking-widest flex items-center gap-2"><Calendar className="w-3.5 h-3.5 text-[#ff6c00]" /> Travel Date</label>
                         <input required type="date" value={formData.date} onChange={(e) => setFormData({...formData, date: e.target.value})} className="w-full bg-slate-50 border border-slate-100 p-5 rounded-2xl font-bold outline-none focus:ring-2 focus:ring-[#ff6c00] transition-all text-[#1a2b47]" />
                       </div>
                     </div>
@@ -165,7 +161,7 @@ const FeaturedTours: React.FC = () => {
                 <div className="p-10 text-center flex flex-col items-center">
                   <div className="w-24 h-24 bg-[#ff6c00]/10 rounded-full flex items-center justify-center mb-10 border border-[#ff6c00]/20 shadow-inner"><CheckCircle2 className="w-12 h-12 text-[#ff6c00]" /></div>
                   <h3 className="text-4xl font-black text-[#1a2b47] mb-6">Expert Assigned!</h3>
-                  <div className="bg-[#ff6c00]/10 p-8 rounded-[2rem] text-[#1a2b47] border border-[#ff6c00]/20 font-bold mb-8 flex flex-col items-center gap-4"><PhoneCall className="w-10 h-10 text-[#ff6c00]" /><p className="text-xl">A naturalist will contact you at <span className="text-[#ff6c00]">{formData.phone}</span> very shortly.</p></div>
+                  <div className="bg-[#ff6c00]/10 p-8 rounded-[2rem] text-[#1a2b47] border border-[#ff6c00]/20 font-bold mb-8 flex flex-col items-center gap-4"><PhoneCall className="w-10 h-10 text-[#ff6c00]" /><p className="text-xl">Check <span className="text-[#ff6c00]">{formData.email}</span> for confirmation.</p></div>
                   <button onClick={() => setSelectedTour(null)} className="w-full bg-[#1a2b47] text-white py-6 rounded-2xl font-black text-xl active:scale-95">CLOSE</button>
                 </div>
               )}

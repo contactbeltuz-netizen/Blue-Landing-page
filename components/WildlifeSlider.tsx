@@ -13,21 +13,21 @@ const WILDLIFE = [
     name: "Saltwater Crocodile",
     category: "Aquatic Giants",
     image: "https://eleganttours.co.in/wp-content/uploads/2025/12/Saltwater-crocodile.webp",
-    position: "object-cover object-center",
+    position: "object-cover object-[65%_center] md:object-center", 
     description: "Lurking in the brackish waters, these prehistoric reptiles are a common sight during low tide expeditions."
   },
   {
     name: "Spotted Deer",
     category: "Gentle Inhabitants",
     image: "https://eleganttours.co.in/wp-content/uploads/2025/12/Spotted-Deer.webp",
-    position: "object-cover object-top", 
+    position: "object-cover object-center", 
     description: "Often seen in groups near the watchtowers, they share a unique symbiotic relationship with the Macaque monkeys."
   },
   {
     name: "Lesser Whistling Duck",
     category: "Avian Wonders",
     image: "https://eleganttours.co.in/wp-content/uploads/2025/12/Lesser-Whistling-Duck.jpg",
-    position: "object-cover object-top", 
+    position: "object-cover object-[70%_center] md:object-top",
     description: "Sundarbans is a paradise for birdwatchers with over 248 species, including rare kingfishers and raptors."
   }
 ];
@@ -73,17 +73,17 @@ const WildlifeSlider: React.FC = () => {
               onClick={prev} 
               onMouseEnter={() => setIsPaused(true)}
               onMouseLeave={() => setIsPaused(false)}
-              className="p-4 md:p-5 rounded-full border border-white/10 bg-white/5 hover:bg-[#ff6c00] hover:border-[#ff6c00] transition-all group active:scale-90"
+              className="p-4 md:p-5 rounded-full border border-white/10 bg-white/5 hover:bg-[#ff6c00] hover:text-white transition-all group active:scale-90"
             >
-              <ChevronLeft className="w-5 md:w-6 h-5 md:h-6 group-hover:scale-110 transition-transform" />
+              <ChevronLeft className="w-6 h-6" />
             </button>
             <button 
               onClick={next} 
               onMouseEnter={() => setIsPaused(true)}
               onMouseLeave={() => setIsPaused(false)}
-              className="p-4 md:p-5 rounded-full border border-white/10 bg-white/5 hover:bg-[#ff6c00] hover:border-[#ff6c00] transition-all group active:scale-90"
+              className="p-4 md:p-5 rounded-full border border-white/10 bg-white/5 hover:bg-[#ff6c00] hover:text-white transition-all group active:scale-90"
             >
-              <ChevronRight className="w-5 md:w-6 h-5 md:h-6 group-hover:scale-110 transition-transform" />
+              <ChevronRight className="w-6 h-6" />
             </button>
           </div>
         </div>
@@ -103,7 +103,7 @@ const WildlifeSlider: React.FC = () => {
                 alt={item.name} 
                 className={`w-full h-full ${item.position} transition-all duration-1000`} 
               />
-              <div className={`absolute inset-0 bg-gradient-to-t from-[#1a2b47] via-[#1a2b47]/20 to-transparent`}></div>
+              <div className="absolute inset-0 bg-gradient-to-t from-[#1a2b47] via-[#1a2b47]/20 to-transparent"></div>
               
               <div className="absolute bottom-0 left-0 w-full p-8 md:p-16 lg:p-20 flex flex-col md:flex-row items-end justify-between gap-8 md:gap-10">
                 <div className="max-w-2xl animate-in slide-in-from-bottom duration-700">
@@ -140,7 +140,6 @@ const WildlifeSlider: React.FC = () => {
             </div>
           ))}
           
-          {/* Progress indicators */}
           <div className="absolute top-8 md:top-10 right-8 md:right-10 flex flex-col gap-3 z-20">
             {WILDLIFE.map((_, i) => (
               <button 
@@ -157,7 +156,7 @@ const WildlifeSlider: React.FC = () => {
           <div className="bg-[#ff6c00]/20 p-2 rounded-lg">
             <Info className="w-5 h-5 text-[#ff6c00]" />
           </div>
-          <p className="text-xs md:text-sm font-bold text-white/60">Professional wildlife guides accompany all expeditions for safe viewing.</p>
+          <p className="text-xs md:text-sm font-bold text-white/60">Professional wildlife Tour Coordinators accompany all expeditions for safe viewing.</p>
         </div>
       </div>
     </section>

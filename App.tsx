@@ -5,7 +5,6 @@ import USPSection from './components/USPSection';
 import WildlifeSlider from './components/WildlifeSlider';
 import MustVisitPlaces from './components/MustVisitPlaces';
 import PackageSection from './components/PackageSection';
-import AIPlanner from './components/AIPlanner';
 import DifferenceSection from './components/DifferenceSection';
 import WhyChooseUs from './components/WhyChooseUs';
 import Testimonials from './components/Testimonials';
@@ -33,16 +32,13 @@ const App: React.FC = () => {
         {/* 5. PRODUCT OFFERINGS: Specific packages to book */}
         <PackageSection />
         
-        {/* 6. MODERN UTILITY: Let AI do the planning */}
-        <AIPlanner />
-        
-        {/* 7. THE DISTINCTION: Why us specifically? */}
+        {/* 6. THE DISTINCTION: Why us specifically? */}
         <DifferenceSection />
         
-        {/* 8. TRUST SIGNALS: Safety and hospitality */}
+        {/* 7. TRUST SIGNALS: Safety and hospitality */}
         <WhyChooseUs />
         
-        {/* 9. SOCIAL PROOF: Real guest stories */}
+        {/* 8. SOCIAL PROOF: Real guest stories */}
         <Testimonials />
       </main>
       

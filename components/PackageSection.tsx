@@ -34,28 +34,8 @@ const PACKAGE_DATA = [
     icon: <Calendar className="w-5 h-5" />
   },
   { 
-    id: 'pkg-4', 
-    name: 'Photography Special', 
-    duration: 'Wildlife Focus', 
-    rating: 4.8, 
-    img: 'https://eleganttours.co.in/wp-content/uploads/2025/12/Tigerjpg.jpg', 
-    tag: 'Pro Selection', 
-    highlights: ['Specialist Photography Guide', 'Golden Hour Boat Positioning', 'Low-Angle Hide Access'],
-    icon: <Camera className="w-5 h-5" />
-  },
-  { 
-    id: 'pkg-5', 
-    name: 'Heritage: Village Walk', 
-    duration: 'Cultural Journey', 
-    rating: 4.6, 
-    img: 'https://eleganttours.co.in/wp-content/uploads/2025/12/Jatar-Deul.jpg', 
-    tag: 'Cultural', 
-    highlights: ['Local Artisan Interaction', 'Honey Collection Lore', 'Village Community Lunch'],
-    icon: <MapPin className="w-5 h-5" />
-  },
-  { 
     id: 'pkg-6', 
-    name: 'Bespoke Private Voyage', 
+    name: 'Customized Tour Packages', 
     duration: 'Flexible Duration', 
     rating: 4.9, 
     img: 'https://eleganttours.co.in/wp-content/uploads/2025/12/Netidhopani.jpg', 

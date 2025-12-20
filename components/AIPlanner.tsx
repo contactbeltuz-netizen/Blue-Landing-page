@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
-import { Sparkles, Loader2, Compass, MapPin, ArrowUpRight, X, User, Phone, CheckCircle2, Waves, Eye } from 'lucide-react';
+import { Sparkles, Loader2, Compass, MapPin, ArrowUpRight, X, User, Phone, CheckCircle2, Waves, Eye, Mail } from 'lucide-react';
 import { getTravelRecommendations, generateDreamDestinationImage } from '../services/geminiService';
 import { AIRecommendation } from '../types';
-import { GoogleGenAI } from "@google/genai";
+import { sendInquiry } from '../services/apiService';
 
 const AIPlanner: React.FC = () => {
   const [loading, setLoading] = useState(false);
@@ -20,7 +20,7 @@ const AIPlanner: React.FC = () => {
     preferences: ''
   });
   
-  const [inquiryData, setInquiryData] = useState({ name: '', phone: '' });
+  const [inquiryData, setInquiryData] = useState({ name: '', phone: '', email: '' });
 
   const fetchImages = async (results: AIRecommendation[]) => {
     results.forEach(async (rec, idx) => {
@@ -43,7 +43,6 @@ const AIPlanner: React.FC = () => {
     try {
       const results = await getTravelRecommendations(formData);
       setRecommendations(results);
-      // Kick off image generation for each result
       fetchImages(results);
     } catch (err) {
       console.error(err);
@@ -57,16 +56,14 @@ const AIPlanner: React.FC = () => {
     if (!selectedPlan) return;
     setIsSending(true);
     try {
-      const ai = new GoogleGenAI({ apiKey: process.env.API_KEY });
-      await ai.models.generateContent({
-        model: "gemini-3-flash-preview",
-        contents: `New AI-Generated Itinerary Inquiry: "${selectedPlan.destination}". 
-        Client: ${inquiryData.name}
-        Phone: ${inquiryData.phone}
-        Guests: ${formData.guests}
-        AI Reason: ${selectedPlan.reason}`,
+      const result = await sendInquiry({
+        name: inquiryData.name,
+        email: inquiryData.email,
+        phone: inquiryData.phone,
+        type: 'Itinerary',
+        details: `AI Selected Itinerary: ${selectedPlan.destination}. Reason: ${selectedPlan.reason}. Guests: ${formData.guests}`
       });
-      setIsBooked(true);
+      if (result) setIsBooked(true);
     } catch (error) {
       setIsBooked(true); 
     } finally {
@@ -233,11 +230,15 @@ const AIPlanner: React.FC = () => {
 
                 <form onSubmit={handleInquirySubmit} className="space-y-6">
                   <div className="space-y-2">
-                    <label className="text-[10px] font-black text-slate-400 uppercase tracking-widest flex items-center gap-2">Full Name</label>
+                    <label className="text-[10px] font-black text-slate-400 uppercase tracking-widest flex items-center gap-2"><User className="w-3.5 h-3.5 text-[#ff6c00]" /> Full Name</label>
                     <input required type="text" placeholder="Your Name" value={inquiryData.name} onChange={(e) => setInquiryData({...inquiryData, name: e.target.value})} className="w-full bg-slate-50 border border-slate-100 p-5 rounded-2xl font-bold outline-none focus:ring-2 focus:ring-[#ff6c00] transition-all text-[#1a2b47]" />
                   </div>
                   <div className="space-y-2">
-                    <label className="text-[10px] font-black text-[#ff6c00] uppercase tracking-widest flex items-center gap-2">WhatsApp Number</label>
+                    <label className="text-[10px] font-black text-slate-400 uppercase tracking-widest flex items-center gap-2"><Mail className="w-3.5 h-3.5 text-[#ff6c00]" /> Email Address</label>
+                    <input required type="email" placeholder="name@email.com" value={inquiryData.email} onChange={(e) => setInquiryData({...inquiryData, email: e.target.value})} className="w-full bg-slate-50 border border-slate-100 p-5 rounded-2xl font-bold outline-none focus:ring-2 focus:ring-[#ff6c00] transition-all text-[#1a2b47]" />
+                  </div>
+                  <div className="space-y-2">
+                    <label className="text-[10px] font-black text-[#ff6c00] uppercase tracking-widest flex items-center gap-2"><Phone className="w-3.5 h-3.5" /> WhatsApp Number</label>
                     <input required inputMode="tel" type="tel" placeholder="+91 00000 00000" value={inquiryData.phone} onChange={(e) => setInquiryData({...inquiryData, phone: e.target.value})} className="w-full bg-[#ff6c00]/5 border border-[#ff6c00]/20 p-5 rounded-2xl font-black outline-none focus:ring-2 focus:ring-[#ff6c00] transition-all text-[#1a2b47]" />
                   </div>
                   <button type="submit" disabled={isSending} className="w-full bg-[#ff6c00] text-white py-6 rounded-2xl font-black text-lg shadow-xl flex items-center justify-center gap-4 active:scale-95 transition-all uppercase tracking-widest mt-4">
@@ -251,7 +252,8 @@ const AIPlanner: React.FC = () => {
                   <CheckCircle2 className="w-12 h-12 text-[#ff6c00]" />
                 </div>
                 <h3 className="text-4xl font-black text-[#1a2b47] mb-4">Request Sent!</h3>
-                <p className="text-slate-500 font-bold mb-10 text-lg">Our lead naturalist will contact you on WhatsApp with the itinerary and pricing details.</p>
+                <p className="text-slate-500 font-bold mb-4 text-lg">Our lead naturalist will contact you on WhatsApp with details.</p>
+                <p className="text-slate-400 text-sm font-bold mb-10">Check <span className="text-[#1a2b47]">{inquiryData.email}</span> for confirmation.</p>
                 <button onClick={() => setSelectedPlan(null)} className="w-full bg-[#1a2b47] text-white py-5 rounded-2xl font-black uppercase tracking-widest text-sm shadow-xl">Back to Planner</button>
               </div>
             )}

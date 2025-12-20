@@ -5,12 +5,12 @@ const REASONS = [
   {
     icon: <HeartHandshake className="w-10 h-10" />,
     title: "Personalized Care",
-    description: "We strictly limit group sizes to ensure you aren't just a number. Our guides adapt the itinerary to your pace and interests."
+    description: "We strictly limit group sizes to ensure you aren't just a number. Our Tour Coordinators adapt the itinerary to your pace and interests."
   },
   {
     icon: <Utensils className="w-10 h-10" />,
     title: "Culinary Delight",
-    description: "Savor hygienic, home-cooked Bengali cuisine prepared fresh on board using organic ingredients sourced from local villages."
+    description: "Popular or Traditional Bengali cuisine will be served on the boat."
   },
   {
     icon: <ShieldCheck className="w-10 h-10" />,
