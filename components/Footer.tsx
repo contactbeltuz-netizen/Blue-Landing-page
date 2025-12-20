@@ -235,7 +235,7 @@ const Footer: React.FC = () => {
         {/* Bottom Bar */}
         <div className="pt-12 border-t border-white/5 flex flex-col md:flex-row justify-between items-center gap-8">
           <p className="text-slate-500 text-[10px] font-black uppercase tracking-widest">
-            © 2025 Elegant Tours & Travels. All rights reserved.
+            © 2025 Elegant Tours. All rights reserved.
           </p>
           <div className="flex gap-8">
             <a href="#" className="text-slate-500 text-[10px] font-black uppercase tracking-widest hover:text-white transition-colors flex items-center gap-2 group">
