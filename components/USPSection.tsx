@@ -9,8 +9,8 @@ const USPs = [
   },
   {
     icon: <Compass className="w-8 h-8 text-[#ff6c00]" />,
-    title: "Expert Naturalists",
-    description: "Every voyage is led by government-approved naturalists with deep knowledge of local flora, fauna, and tiger behavior."
+    title: "Tour Experts",
+    description: "Every voyage is led by government-approved Tour Experts with deep knowledge of local flora, fauna, and tiger behavior."
   },
   {
     icon: <Ship className="w-8 h-8 text-[#ff6c00]" />,
