@@ -114,7 +114,7 @@ const Hero: React.FC = () => {
           </div>
           
           <div className="mt-12 flex flex-wrap items-center justify-center gap-x-10 gap-y-4 text-white/60 text-[10px] font-black uppercase tracking-[0.25em]">
-             <div className="flex items-center gap-2.5"><CheckCircle2 className="w-4 h-4 text-[#ff6c00]" /> Verified Local Tour Coordinators</div>
+             <div className="flex items-center gap-2.5"><CheckCircle2 className="w-4 h-4 text-[#ff6c00]" /> Verified Tour Coordinators</div>
              <div className="flex items-center gap-2.5"><CheckCircle2 className="w-4 h-4 text-[#ff6c00]" /> 24/7 Concierge Support</div>
              <div className="flex items-center gap-2.5"><CheckCircle2 className="w-4 h-4 text-[#ff6c00]" /> Eco-Certified Expeditions</div>
           </div>

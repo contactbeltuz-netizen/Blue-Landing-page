@@ -8,7 +8,7 @@ const PACKAGE_DATA = [
     name: 'Day Tours: Nature Express', 
     duration: '6:00 AM - 6:00 PM', 
     rating: 4.7, 
-    img: 'https://eleganttours.co.in/wp-content/uploads/2025/12/Sajnekhali-Watch-Tower.jpg', 
+    img: 'https://eleganttours.co.in/wp-content/uploads/2025/12/photo-15516155771c7e180a77ac.webp', 
     tag: 'Popular', 
     highlights: ['Sajnekhali Watch Tower', 'Mangrove Interpretation Centre', 'Breakfast & Lunch on Boat'],
     icon: <Clock className="w-5 h-5" />
@@ -18,7 +18,7 @@ const PACKAGE_DATA = [
     name: '1 Night 2 Days Expedition', 
     duration: 'Overnight Adventure', 
     rating: 4.9, 
-    img: 'https://eleganttours.co.in/wp-content/uploads/2025/12/dobanki_watch-tower.jpg', 
+    img: 'https://eleganttours.co.in/wp-content/uploads/2025/12/IMG20241109135240-scaled.jpg', 
     tag: 'Best Seller', 
     highlights: ['Sudhanyakhali Tiger Reserve', 'Dobanki Canopy Walk', 'Traditional Village Experience'],
     icon: <Moon className="w-5 h-5" />
@@ -28,9 +28,9 @@ const PACKAGE_DATA = [
     name: '2 Night 3 Days Immersion', 
     duration: 'The Full Experience', 
     rating: 5.0, 
-    img: 'https://eleganttours.co.in/wp-content/uploads/2025/12/Sudhanyakhali-Watch-Tower_0.jpg', 
+    img: 'https://eleganttours.co.in/wp-content/uploads/2025/12/unnamed-1.webp', 
     tag: 'Elite Choice', 
-    highlights: ['Deep Jungle Navigation', 'Netidhopani Ruins', 'Evening Cultural Performance'],
+    highlights: ['Deep Jungle Navigation', 'Evening Cultural Performance'],
     icon: <Calendar className="w-5 h-5" />
   },
   { 
@@ -38,9 +38,9 @@ const PACKAGE_DATA = [
     name: 'Customized Tour Packages', 
     duration: 'Flexible Duration', 
     rating: 4.9, 
-    img: 'https://eleganttours.co.in/wp-content/uploads/2025/12/Netidhopani.jpg', 
+    img: 'https://eleganttours.co.in/wp-content/uploads/2025/12/premium_photo-1686310335921-38acc0679321.webp', 
     tag: 'Tailor Made', 
-    highlights: ['Exclusive Private Boat', 'Photographer Assistant', 'Custom Itinerary Design'],
+    highlights: ['Exclusive Private Boat', 'Custom Itinerary Design'],
     icon: <Sparkles className="w-5 h-5" />
   }
 ];

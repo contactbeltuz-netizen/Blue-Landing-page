@@ -156,7 +156,7 @@ const WildlifeSlider: React.FC = () => {
           <div className="bg-[#ff6c00]/20 p-2 rounded-lg">
             <Info className="w-5 h-5 text-[#ff6c00]" />
           </div>
-          <p className="text-xs md:text-sm font-bold text-white/60">Professional wildlife Tour Coordinators accompany all expeditions for safe viewing.</p>
+          <p className="text-xs md:text-sm font-bold text-white/60">Professional Tour Coordinators accompany all expeditions for safe viewing.</p>
         </div>
       </div>
     </section>
