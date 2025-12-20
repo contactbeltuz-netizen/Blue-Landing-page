@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { Sparkles, Loader2, Compass, MapPin, ArrowUpRight, X, User, Phone, CheckCircle2, Waves, Eye, Mail } from 'lucide-react';
 import { getTravelRecommendations, generateDreamDestinationImage } from '../services/geminiService';
 import { AIRecommendation } from '../types';
@@ -87,7 +87,7 @@ const AIPlanner: React.FC = () => {
             AI Expedition <span className="text-[#ff6c00]">Designer</span>
           </h2>
           <p className="max-w-2xl mx-auto text-slate-500 font-medium text-lg md:text-xl leading-relaxed">
-            Describe your dream encounter, and our AI naturalists will synthesize a bespoke Sundarbans itinerary with cinematic visuals.
+            Describe your dream encounter, and our AI Tour Experts will synthesize a bespoke Sundarbans itinerary with cinematic visuals.
           </p>
         </div>
 
@@ -252,7 +252,7 @@ const AIPlanner: React.FC = () => {
                   <CheckCircle2 className="w-12 h-12 text-[#ff6c00]" />
                 </div>
                 <h3 className="text-4xl font-black text-[#1a2b47] mb-4">Request Sent!</h3>
-                <p className="text-slate-500 font-bold mb-4 text-lg">Our lead naturalist will contact you on WhatsApp with details.</p>
+                <p className="text-slate-500 font-bold mb-4 text-lg">Our Tour Expert will contact you on WhatsApp with details.</p>
                 <p className="text-slate-400 text-sm font-bold mb-10">Check <span className="text-[#1a2b47]">{inquiryData.email}</span> for confirmation.</p>
                 <button onClick={() => setSelectedPlan(null)} className="w-full bg-[#1a2b47] text-white py-5 rounded-2xl font-black uppercase tracking-widest text-sm shadow-xl">Back to Planner</button>
               </div>

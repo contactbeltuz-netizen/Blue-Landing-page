@@ -107,7 +107,7 @@ const ContactForm: React.FC = () => {
               <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#ff6c00] to-orange-400">Calls You.</span>
             </h2>
             <p className="text-slate-400 font-medium text-lg leading-relaxed max-w-xs">
-              Leave your details. A specialized naturalist will curate your sighting forecast and itinerary.
+              Leave your details. A specialized Tour Expert will curate your sighting forecast and itinerary.
             </p>
           </div>
 
@@ -242,7 +242,7 @@ const ContactForm: React.FC = () => {
               </div>
               <h3 className="text-4xl font-black text-[#1a2b47] mb-6 tracking-tight">Expedition Logged!</h3>
               <p className="text-slate-500 text-lg max-w-sm mb-4 font-medium leading-relaxed">
-                Thank you, <span className="text-[#1a2b47] font-bold">{formData.name}</span>. Our lead naturalist will reach out to <span className="text-[#ff6c00] font-black underline decoration-2 underline-offset-8 decoration-[#ff6c00]/30">{formData.phone}</span> very shortly.
+                Thank you, <span className="text-[#1a2b47] font-bold">{formData.name}</span>. Our Tour Expert will reach out to <span className="text-[#ff6c00] font-black underline decoration-2 underline-offset-8 decoration-[#ff6c00]/30">{formData.phone}</span> very shortly.
               </p>
               <p className="text-slate-400 text-sm font-bold mb-12">
                 A confirmation email has been sent to <span className="text-[#1a2b47]">{formData.email}</span>.
